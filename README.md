@@ -96,41 +96,62 @@ insert into returnstatus values (1, 1, 'The Great Gatsby', '2023-03-15', '316148
 
 
 -- Retrieve the book title, category, and rental price of all available books. 
+
 select book_title, category,rental_price, status from books where status='yes';
 
 -- List the employee names and their respective salaries in descending order of salary. 
+
 select emp_name,salary from employee order by salary desc;
 
 -- Retrieve the book titles and the corresponding customers who have issued those books. 
+
 select b.book_title, c.customer_name from books b join issuestatus i on b.isbn = i.isbn_books
 join customer c on i.issued_cust = c.customer_id;
 
+
 -- Display the total count of books in each category. 
+
 select category, count(*) as total_books from books group by category;
 
+
 -- Retrieve the employee names and their positions for the employees whose salaries are above Rs.50,000. 
+
 select emp_name, position from employee where salary > 50000;
 
+
 -- List the customer names who registered before 2022-01-01 and have not issued any books yet. 
+
 select c.customer_name from customer c left join issuestatus i on c.customer_id = i.issued_cust
 where c.reg_date < '2022-01-01' and i.issued_cust is null;
 
+
 -- Display the branch numbers and the total count of employees in each branch. 
+
 select branch_no, count(*) as total_employees from employee group by branch_no;
 
+
 -- Display the names of customers who have issued books in the month of June 2023.
+
 select c.customer_name from customer c join issuestatus i on c.customer_id = i.issued_cust
 where i.issue_date between '2023-06-01' and '2023-06-30';
 
+
 --  Retrieve book_title from book table containing history. 
+
 select book_title from books where book_title like '%history%';
 
+
 -- Retrieve the branch numbers along with the count of employees for branches having more than 5 employees
+
 select branch_no, count(*) as total_employees from employee group by branch_no having count(*) > 5;
 
+
 -- Retrieve the names of employees who manage branches and their respective branch addresses.
+
 select e.emp_name, b.branch_address from employee e join branch b on e.branch_no = b.branch_no where position = 'Manager';
 
+
 --  Display the names of customers who have issued books with a rental price higher than Rs. 25.
+
 select c.customer_name from customer c join issuestatus i on c.customer_id = i.issued_cust
 join books b on i.isbn_books = b.isbn where b.rental_price > 25;
