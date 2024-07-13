@@ -8,7 +8,9 @@ Create a database named library and following TABLES in the database:
 3. Books
 4. Customer
 5. IssueStatus
-6. ReturnStatus 
+6. ReturnStatus
+
+
 -- create database library
 create database library;
 use library;
